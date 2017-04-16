@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <div id="app" >
+      <h1 class="text-center">Most voted issues</h1>
+      <header class="form-inline text-center">
+        <div>
+          <input type="text" name="user" v-model="config.user" placeholder="user" class="form-control">
+          <input type="text" name="repo" v-model="config.repo" placeholder="repo" class="form-control">
+        </div>
+        <div>
+          <div>To avoid rate limit ratio...</div>
+          <input type="text" name="username" v-model="config.username" placeholder="username" class="form-control"/>
+          <input type="password" name="password" v-model="config.password" v-on:blur="reload()" placeholder="password" class="form-control"/>
+        </div>
+      </header>
+      <section>
+        <div v-for="record in filterQualified" class="panel">
+          <a :href="record.html_url" target="_blank" class="panel-heading">{{ record.title }}
+            <span class="pull-right">
+              {{ record.reactions['+1'] }} <img class="icon" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png">
+              {{ record.reactions['-1'] }} <img class="icon" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44e.png">
+            </span>
+          </a>
+          <div class="panel-body">{{ record.body | truncate }}
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Libs -->
+    <script src="bower_components/vue/dist/vue.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Implementation -->
+    <script src="index.js"></script>
+  </body>
+</html>

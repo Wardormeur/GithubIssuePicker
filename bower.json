@@ -1,0 +1,18 @@
+{
+  "name": "web",
+  "version": "0.0.0",
+  "authors": [
+    "Wardormeur <wardormeur@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "~2.2.6"
+  }
+}
