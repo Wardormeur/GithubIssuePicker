@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "DevDashboard",
+  "short_name": "DevD",
+  "description": "Replace the new tab with a list of pending PR, newest issues and CI statuses",
+  "version": "0.1",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "*://*.github.com/*",
+    "*://*.circleci.com/*",
+    "*://maxcdn.bootstrapcdn.com/*",
+    "*://oss.maxcdn.com/*",
+    "*://cdnjs.cloudflare.com/*"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "content_security_policy": "script-src 'self' https://maxcdn.boostrapcd.com https://oss.maxcdn.com https://cdnjs.cloudflare.com https://ajax.googleapis.com 'unsafe-eval'; object-src 'self'",
+  "homepage_url": "https://github.com/Wardormeur/GithubIssuePicker",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "browser_action": {
+    "default_title": "DevDashboard"
+  }
+}
