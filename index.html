@@ -26,11 +26,6 @@
           <input type="text" name="user" v-model="config.user" placeholder="user" class="form-control">
           <input type="text" name="repo" v-model="config.repo" placeholder="repo" class="form-control">
         </div>
-        <div>
-          <div>To avoid rate limit ratio...</div>
-          <input type="text" name="username" v-model="config.username" placeholder="username" class="form-control"/>
-          <input type="password" name="password" v-model="config.password" v-on:blur="reload()" placeholder="password" class="form-control"/>
-        </div>
       </header>
       <section>
         <div v-for="record in filterQualified" class="panel">

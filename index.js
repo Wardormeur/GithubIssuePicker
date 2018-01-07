@@ -7,8 +7,7 @@ var configStorage = {
     return _.isEmpty(config) ? {} : config;
   },
   save: function (config) {
-    var conf = _.clone(config);
-    delete conf.password;
+    const conf = _.clone(config);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(conf));
   }
 };
@@ -19,7 +18,6 @@ new Vue({
   data: {
     config: {
       user: '',
-      username: '',
       repo: ''
     },
 
@@ -30,6 +28,7 @@ new Vue({
 
   created: function () {
     _.assign(this.config, configStorage.fetch());
+    this.reload();
   },
 
   watch: {
@@ -51,6 +50,9 @@ new Vue({
       }])
       .reverse()
       .value();
+    },
+    token () {
+      return localStorage.getItem('github_token');
     }
   },
   filters: {
@@ -91,7 +93,7 @@ new Vue({
       return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', self.buildUrl());
-        if (self.config.username && self.config.password) xhr.setRequestHeader("Authorization", "Basic " + btoa(self.config.username + ':' + self.config.password));
+        if (this.token) xhr.setRequestHeader("Authorization", "Token " + this.token);
         xhr.setRequestHeader('Accept', 'application/vnd.github.squirrel-girl-preview');
         xhr.onload = function () {
           self.count = JSON.parse(xhr.responseText).open_issues_count;
@@ -107,7 +109,7 @@ new Vue({
       var self = this;
       var xhr = new XMLHttpRequest();
       xhr.open('GET', self.buildUrl(true) + '&page=' + page);
-      if (self.config.username && self.config.password) xhr.setRequestHeader("Authorization", "Basic " + btoa(self.config.username + ':' + self.config.password));
+      if (this.token) xhr.setRequestHeader("Authorization", "Token " + this.token);
       xhr.setRequestHeader('Accept', 'application/vnd.github.squirrel-girl-preview');
       xhr.onload = function () {
         self.issues = _.concat(self.issues, JSON.parse(xhr.responseText));

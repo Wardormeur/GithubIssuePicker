@@ -28,7 +28,12 @@
             <a href="#" class="btn save-token">Save</a>
         </div>
     </div>
-
+  <script type="text/javascript">
+    function submit () {
+      const token = document.getElementById('github_token').value;
+      localStorage.setItem('github_token', token);
+    }
+  </script>
 </div>
 </body>
 </html>
